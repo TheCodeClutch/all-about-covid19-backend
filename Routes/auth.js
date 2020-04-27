@@ -121,9 +121,10 @@ router.get('/getToken', middleware, (request, response) => {
 })
 
 router.get('/isloggedin', middleware, (req, res) => {
+	console.log(req.decode)
 	res.json({
 		status: 200,
-		profile_pic: req.decode.picture,
+		profile_pic: req.decode.pic,
 		name: req.decode.name,
 		email: req.decode.email
 	})
