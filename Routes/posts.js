@@ -74,7 +74,7 @@ router.post('/getposts', (req, res) => {
 });
 })
 
-router.post('/removepost', (req, res)=> {
+router.post('/removepost', middleware, (req, res)=> {
 	Posts.find({ POST_ID: req.body.post_id }).remove()
 	.then( responseDB => {
 		if(responseDB.deletedCount === 0){
