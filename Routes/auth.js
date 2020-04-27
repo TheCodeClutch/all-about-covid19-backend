@@ -5,7 +5,7 @@ const queryString = require('query-string');
 const helpers = require('../Helpers/helpers.js');
 const middleware = require('../Helpers/auth-middleware').session;
 
-const REDIRECT_URI = 'https://thecodeclutch.herokuapp.com/auth/google'
+const REDIRECT_URI = 'https://allaboutcovid-19.herokuapp.com/auth/google'
 // const REDIRECT_URI = 'http://localhost:3000/auth/google';
 
 // to get the google init auth url (init request from frontend)
@@ -46,6 +46,8 @@ router.get('/google', (request, response) => {
 				.then(responseFromDB => {
 					const payload = {
 						email: result.email,
+						name: result.name,
+						pic: result.picture,
 						expiry: new Date().getTime() + 900000
 					};
 					const token = jwt.sign(payload, process.env.SECRET);
@@ -55,7 +57,7 @@ router.get('/google', (request, response) => {
 						sessionID: token,
 						email: result.email,
 					});
-					response.status(301).redirect(`https://thecodeclutch.netlify.app/dashboard?${redirectURL}`)
+					response.status(301).redirect(`https://allaboutcovid19.netlify.app/help?${redirectURL}`)
 				})
 				.catch(err => {
 					if (err.code === 11000) {
@@ -72,6 +74,8 @@ router.get('/google', (request, response) => {
 							.then(doc => {
 								const payload = {
 									email: result.email,
+									name: result.name,
+									pic: result.picture,
 									expiry: new Date().getTime() + 900000
 								};
 								const token = jwt.sign(payload, process.env.SECRET);
@@ -81,17 +85,17 @@ router.get('/google', (request, response) => {
 									sessionID: token,
 									email: result.email,
 								});
-								response.status(301).redirect(`https://thecodeclutch.netlify.app/dashboard?${redirectURL}`)
+								response.status(301).redirect(`https://allaboutcovid19.netlify.app/help?${redirectURL}`)
 							})
 							.catch(err => {
-								response.status(301).redirect("https://thecodeclutch.netlify.app/error");
+								response.status(301).redirect("https://allaboutcovid19.netlify.app/error");
 							})
 					}
 
 				})
 		})
 		.catch( err => {
-				response.status(301).redirect("https://thecodeclutch.netlify.app/error");
+				response.status(301).redirect("https://allaboutcovid19.netlify.app/error");
 		})
 	})
 	.catch( err => {
@@ -106,6 +110,8 @@ router.get('/google', (request, response) => {
 router.get('/getToken', middleware, (request, response) => {
 	const payload = {
 		email: request.decode.email,
+		name: request.decode.name,
+		pic: request.decode.pic,
 		expiry: new Date().getTime() + 900000
 	};
 	const token = jwt.sign(payload, process.env.SECRET);

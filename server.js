@@ -10,7 +10,7 @@ const app = express();
 // requiring local modules
 const status = require('./Routes/status');
 const auth = require('./Routes/auth');
-const countriesAPI = require('./Routes/countriesAPI');
+const posts = require('./Routes/posts');
 
 //db connect
 require('./Database/connection.js');
@@ -29,7 +29,6 @@ app.use('/', status);
 app.use('/auth', auth);
 
 //secure routes
-app.use('/secure', countriesAPI);
-
+app.use('/posts', posts);
 // Init the server
 app.listen( port, () => {})

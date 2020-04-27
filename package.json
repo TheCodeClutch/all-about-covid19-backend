@@ -14,7 +14,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.10",
     "nodemon": "^2.0.3",
-    "query-string": "^6.12.1"
+    "query-string": "^6.12.1",
+    "twit": "^2.2.11"
   },
   "devDependencies": {},
   "scripts": {

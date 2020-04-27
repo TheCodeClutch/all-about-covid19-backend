@@ -1,5 +1,5 @@
 const axios = require('axios');
-const REDIRECT_URI = 'https://thecodeclutch.herokuapp.com/auth/google'
+const REDIRECT_URI = 'https://allaboutcovid-19.herokuapp.com/auth/google'
 // const REDIRECT_URI = 'http://localhost:3000/auth/google';
 
 // function to get access_token from credentials of the client
