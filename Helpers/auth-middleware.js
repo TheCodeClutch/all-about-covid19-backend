@@ -6,6 +6,7 @@ module.exports.session = (request, response, next) => {
     jwt.verify(token, process.env.SECRET, (error, decode) => {
       if (error) {
         response.status(401).json({
+          status: 401,
           message: 'Authentication failed (unable to authenticate access token)',
         });
       } else {
@@ -13,6 +14,7 @@ module.exports.session = (request, response, next) => {
         request.decode = decode;
         if(request.decode.expiry < new Date().getTime()){
           response.status(401).json({
+            status: 401,
             message: 'Session expired',
           });
         } else {
@@ -22,6 +24,7 @@ module.exports.session = (request, response, next) => {
     });
   } else {
     response.status(401).json({
+      status: 401,
       message: 'Unauthorised access',
     });
   }

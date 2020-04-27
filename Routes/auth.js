@@ -5,8 +5,8 @@ const queryString = require('query-string');
 const helpers = require('../Helpers/helpers.js');
 const middleware = require('../Helpers/auth-middleware').session;
 
-const REDIRECT_URI = 'https://allaboutcovid-19.herokuapp.com/auth/google'
-// const REDIRECT_URI = 'http://localhost:3000/auth/google';
+// const REDIRECT_URI = 'https://allaboutcovid-19.herokuapp.com/auth/google'
+const REDIRECT_URI = 'http://localhost:3000/auth/google';
 
 // to get the google init auth url (init request from frontend)
 router.get('/getGoogleAuthUrl', (request, response) => {
@@ -117,6 +117,15 @@ router.get('/getToken', middleware, (request, response) => {
 	const token = jwt.sign(payload, process.env.SECRET);
 	response.status(200).json({
 		token
+	})
+})
+
+router.get('/isloggedin', middleware, (req, res) => {
+	res.json({
+		status: 200,
+		profile_pic: req.decode.picture,
+		name: req.decode.name,
+		email: req.decode.email
 	})
 })
 
