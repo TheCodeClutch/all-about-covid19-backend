@@ -7,7 +7,7 @@ module.exports.session = (request, response, next) => {
       if (error) {
         response.status(401).json({
           status: 401,
-          message: 'Authentication failed (unable to authenticate access token)',
+          err: 'Authentication failed (unable to authenticate access token)',
         });
       } else {
         console.log(decode);
@@ -15,7 +15,7 @@ module.exports.session = (request, response, next) => {
         if(request.decode.expiry < new Date().getTime()){
           response.status(401).json({
             status: 401,
-            message: 'Session expired',
+            err: 'Session expired',
           });
         } else {
           next();
@@ -25,7 +25,7 @@ module.exports.session = (request, response, next) => {
   } else {
     response.status(401).json({
       status: 401,
-      message: 'Unauthorised access',
+      err: 'Unauthorised access',
     });
   }
 };
