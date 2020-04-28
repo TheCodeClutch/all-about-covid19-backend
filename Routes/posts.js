@@ -4,8 +4,17 @@ const Posts = require('../Database/models').posts;
 const middleware = require('../Helpers/auth-middleware').session;
 
 router.post('/saveposts', middleware, (req, res) => {
+	let idTitle = ""; 
+	for(let i = 0; i < req.body.title.length; i++){
+		if(req.body.title.charAt(i) === " "){
+			idTitle = idTitle + "-";
+		} else {
+			idTitle = idTitle + req.body.title.charAt(i);
+		}
+	}
+
 	let newPost = new Posts({
-		POST_ID: req.body.title + req.body.time_ms,
+		POST_ID: idTitle + req.body.time_ms,
 		STATE: req.body.state,
 		CITY: req.body.city,
 		TITLE: req.body.title,

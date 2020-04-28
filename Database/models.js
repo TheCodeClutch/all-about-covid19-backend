@@ -43,6 +43,7 @@ const posts = new mongoose.Schema({
   },
   EMAIL: {
     type: String,
+    unique: true
   },
   IMAGE_URL: {
     type: String,
