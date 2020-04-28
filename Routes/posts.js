@@ -83,6 +83,21 @@ router.post('/getposts', (req, res) => {
 });
 })
 
+router.get('/getselfposts', middleware, (req, res) => {
+	Posts.find({EMAIL: req.decode.email}, function(err, docs) {
+    if (!err) { 
+        res.json({
+					msg: docs
+				})
+    }
+    else {
+        res.json({
+					err
+				})
+    }
+});
+})
+
 router.post('/removepost', middleware, (req, res)=> {
 	Posts.find({ POST_ID: req.body.post_id }).remove()
 	.then( responseDB => {
