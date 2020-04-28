@@ -27,7 +27,7 @@ router.post('/saveposts', middleware, (req, res) => {
 		.catch(err => {
 			if (err.code === 11000) {
 				res.json({
-					msg: "You cannot post multiple requests, delete previous request, then post a new one"
+					err: "You cannot post multiple requests, delete previous request, then post a new one"
 				})
 			} else {
 				res.json({
@@ -49,7 +49,7 @@ router.post('/savecomment', middleware, (req, res) => {
 	Posts.update({ POST_ID: req.body.post_id }, { $push: { COMMENTS: data } })
 		.then(responseDB => {
 			res.json({
-				responseDB
+				msg: "Sucessfully posted comment"
 			})
 		})
 		.catch(err => {
@@ -63,7 +63,7 @@ router.post('/getposts', (req, res) => {
 	Posts.find({STATE: req.body.state, CITY: req.body.city}, function(err, docs) {
     if (!err) { 
         res.json({
-					docs
+					msg: docs
 				})
     }
     else {
