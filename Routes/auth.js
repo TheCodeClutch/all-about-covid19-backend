@@ -58,7 +58,7 @@ router.get('/google', (request, response) => {
 						sessionID: token,
 						email: result.email,
 					});
-					response.status(301).redirect(`https://allaboutcovid19.netlify.app/help?${redirectURL}`)
+					response.status(301).redirect(`https://coviddesk.in/help?${redirectURL}`)
 				})
 				.catch(err => {
 					if (err.code === 11000) {
@@ -86,17 +86,17 @@ router.get('/google', (request, response) => {
 									sessionID: token,
 									email: result.email,
 								});
-								response.status(301).redirect(`https://allaboutcovid19.netlify.app/help?${redirectURL}`)
+								response.status(301).redirect(`https://coviddesk.in/help?${redirectURL}`)
 							})
 							.catch(err => {
-								response.status(301).redirect("https://allaboutcovid19.netlify.app/error");
+								response.status(301).redirect("https://coviddesk.in/error");
 							})
 					}
 
 				})
 		})
 		.catch( err => {
-				response.status(301).redirect("https://allaboutcovid19.netlify.app/error");
+				response.status(301).redirect("https://coviddesk.in/error");
 		})
 	})
 	.catch( err => {
